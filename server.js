@@ -1,11 +1,21 @@
 const express = require ('express');
+const mongoose = require('mongoose');
+const requireDir = require('require-dir');
 
+//Iniciando o App
 const app = express();
 
 var teste = 'Testando';
 
-app.get('/', (req, res) => {
-    res.send('Hello Diego');
-});
+//Iniciando o DB
+mongoose.connect(
+    'mongodb://localhost:27017/nodeapi',
+);
+requireDir('./src/models');
+
+// const Product = mongoose.model('Product');
+
+//Rotas
+app.use('/api', require('./src/routes'));
 
 app.listen(3001);
