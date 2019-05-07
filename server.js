@@ -1,11 +1,12 @@
 const express = require ('express');
 const mongoose = require('mongoose');
 const requireDir = require('require-dir');
+const cors = require('cors');
 
 //Iniciando o App
 const app = express();
-
-var teste = 'Testando';
+app.use(express.json());
+app.use(cors());
 
 //Iniciando o DB
 mongoose.connect(
@@ -13,7 +14,6 @@ mongoose.connect(
 );
 requireDir('./src/models');
 
-// const Product = mongoose.model('Product');
 
 //Rotas
 app.use('/api', require('./src/routes'));
